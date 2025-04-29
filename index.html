@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎉 Sumit's Birthday World 🌍</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: radial-gradient(circle at top left, #ff8a00, #e52e71);
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
+    header {
+      padding: 40px 20px 20px;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+    header h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, #ffde59, #ff6ec4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff; }
+      to { text-shadow: 0 0 25px #ff6ec4; }
+    }
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      width: 200px;
+      height: 260px;
+      perspective: 1000px;
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+    .card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .card-back {
+      background: #ff6ec4;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      padding: 20px;
+      transform: rotateY(180deg);
+    }
+    .message {
+      max-width: 700px;
+      margin: 30px auto;
+      font-size: 1.3rem;
+      line-height: 1.7;
+      text-align: center;
+      animation: fadeInUp 2s ease;
+    }
+    .countdown {
+      margin: 30px auto;
+      font-size: 2rem;
+      text-align: center;
+      background: #fff3;
+      padding: 20px;
+      border-radius: 20px;
+      width: fit-content;
+    }
+    .qr-code {
+      width: 200px;
+      margin: 30px auto;
+      display: block;
+      border: 4px solid #fff;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #fff;
+    }
+    .btn {
+      padding: 14px 28px;
+      background: #ffde59;
+      color: #000;
+      border: none;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #ffde59;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+    .btn:hover {
+      background: #ffa500;
+      box-shadow: 0 0 25px #ffa500;
+    }
+    .social {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    .social a {
+      color: #fff;
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #eee;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/17/audio_b9565b151d.mp3" type="audio/mpeg">
+  </audio>
+
+  <header>
+    <h1>Welcome to Sumit's Birthday World 🎉</h1>
+  </header>
+
+  <div class="gallery">
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="myphoto.jpg" alt="Sumit 1">
+        </div>
+        <div class="card-back">You're Awesome! 🎊</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="myphoto1.jpg" alt="Sumit 2">
+        </div>
+        <div class="card-back">Party Time! 🕺</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="myphoto2.jpg" alt="Sumit 3">
+        </div>
+        <div class="card-back">Thanks for Coming! 🙌</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="message">
+    <p>Aaj mera janmdin hai aur aapka pyar mera sabse bada gift hai! 💝 Agar aap mujhe surprise dena chahte hain, toh neeche QR code scan karein — aur mujhe ek pyaari smile de dein! 😇</p>
+  </div>
+
+  <div class="countdown" id="timer">
+    ⏳ Countdown to the Birthday Gift! 🎁
+  </div>
+
+  <img src="scanner-photo.jpg" alt="QR Code" class="qr-code" />
+
+  <div style="text-align:center">
+    <button class="btn" onclick="alert('Thank you for your lovely gift! 💝')">Send Gift</button>
+  </div>
+
+  <div class="social">
+    <p>Connect with me on Instagram: <a href="https://instagram.com/_sumit_mishra__1" target="_blank">@_sumit_mishra__1</a></p>
+  </div>
+
+  <footer>
+    Designed by Mr. Sumit Mishra Sir 🚀 | Happy Birthday Sumit! 🎂
+  </footer>
+
+  <script>
+    const timer = document.getElementById("timer");
+
+// Set the birthday end time (12:00 AM tonight)
+let endTime = new Date();
+endTime.setHours(23, 59, 59, 999); // Midnight today
+
+setInterval(() => {
+  let now = new Date().getTime();
+  let remaining = endTime.getTime() - now; // Time left until midnight
+
+  if (remaining > 0) {
+    let hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+    timer.innerHTML = `⏳ ${hours}h ${minutes}m ${seconds}s left until the birthday ends! 🎂`;
+  } else {
+    timer.innerHTML = "🎉 The birthday celebration has officially ended! Hope it was amazing! 🎊";
+  }
+}, 1000);
+
+    // Background particle animation
+    const c = document.getElementById("bg");
+    const ctx = c.getContext("2d");
+    c.width = innerWidth;
+    c.height = innerHeight;
+    let particles = [];
+    for (let i = 0; i < 150; i++) {
+      particles.push({
+        x: Math.random() * c.width,
+        y: Math.random() * c.height,
+        r: Math.random() * 3 + 1,
+        dx: (Math.random() - 0.5) * 2,
+        dy: (Math.random() - 0.5) * 2,
+        color: `hsl(${Math.random() * 360}, 70%, 70%)`
+      });
+    }
+    function animate() {
+      ctx.clearRect(0, 0, c.width, c.height);
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > c.width) p.dx *= -1;
+        if (p.y < 0 || p.y > c.height) p.dy *= -1;
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
